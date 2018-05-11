@@ -6,23 +6,10 @@
 var repeatedStringMatch = function(A, B) {
   let count = 1;
   const original = A;
-  const test = A + A;
   
-  if(!B.includes(A) && !A.includes(B) && !test.includes(B)) {
-    return -1;
-  }
+  for(;A.length < B.length; count++) A += original;
+  if (A.includes(B)) return count;
+  if ((A+A).includes(B)) return count + 1;
   
-  if(test.includes(B) && !A.includes(B)) return 2;
-  
-  while(A.length <= B.length + original.length) {
-    if(A.includes(B)) {
-      break;
-    }
-    count++;
-    A = A + original;
-  }
-  
-  if(!A.includes(B)) return -1;
-  
-  return count;
+  return -1;
 };
